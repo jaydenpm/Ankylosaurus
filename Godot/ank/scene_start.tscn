@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlub2n7vx5jgn"]
+
+[ext_resource type="Script" uid="uid://bls3bwo7jxxds" path="res://start_hud.gd" id="1_53pfy"]
+
+[node name="Node2DStartScreen" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_53pfy")
+
+[node name="LabelTitle" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -256.0
+offset_right = 128.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Ankylosaurus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonStartGame" type="Button" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -124.0
+offset_right = 255.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
+
+[connection signal="pressed" from="HUD/ButtonStartGame" to="HUD" method="_on_button_start_game_pressed"]
