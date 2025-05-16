@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlub2n7vx5jgn"]
 
-[ext_resource type="Script" uid="uid://bls3bwo7jxxds" path="res://start_hud.gd" id="1_53pfy"]
+[ext_resource type="Script" uid="uid://bls3bwo7jxxds" path="res://scripts/start_hud.gd" id="1_53pfy"]
 
 [node name="Node2DStartScreen" type="Node2D"]
 
