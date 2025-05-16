@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://d18m6tjj7ekjp"]
 
-[ext_resource type="Script" uid="uid://bxe2idm88rwqi" path="res://scripts/branch_tree_hud.gd" id="1_tgpox"]
-[ext_resource type="Script" uid="uid://6jugxpswyhyb" path="res://scripts/canvas_layer_branch_map.gd" id="2_43bds"]
-[ext_resource type="Script" uid="uid://da3ou43wwqr87" path="res://scripts/node_player_state.gd" id="2_jh4iv"]
-[ext_resource type="Texture2D" uid="uid://b1w6437q8gkh4" path="res://content/images/icon_peep.png" id="3_0lsxy"]
-[ext_resource type="Texture2D" uid="uid://dofag8acl2hrt" path="res://content/images/icon_branch.png" id="4_ahhl5"]
+[ext_resource type="Script" uid="uid://bxe2idm88rwqi" path="res://scripts/branch_tree_hud.gd" id="1_s11bh"]
+[ext_resource type="PackedScene" uid="uid://l823n0aboji3" path="res://scenes/scene_branch_map.tscn" id="2_87o87"]
+[ext_resource type="Script" uid="uid://da3ou43wwqr87" path="res://scripts/node_player_state.gd" id="3_y1nl6"]
+[ext_resource type="Texture2D" uid="uid://b1w6437q8gkh4" path="res://content/images/icon_peep.png" id="4_4n7a1"]
+[ext_resource type="Texture2D" uid="uid://dofag8acl2hrt" path="res://content/images/icon_branch.png" id="5_t5ui8"]
 
-[node name="Node2DBranchTree" type="Node2D"]
+[node name="Node2DBranchGame" type="Node2D"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("1_tgpox")
+script = ExtResource("1_s11bh")
 
 [node name="LabelTitle" type="Label" parent="HUD"]
 offset_left = 507.0
@@ -66,20 +66,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "4"
 
-[node name="CanvasLayerBranchMap" type="CanvasLayer" parent="."]
-script = ExtResource("2_43bds")
+[node name="CanvasLayerBranchMap" parent="." instance=ExtResource("2_87o87")]
+offset = Vector2(250, 250)
+transform = Transform2D(1, 0, 0, 1, 250, 250)
 
 [node name="NodePlayerState" type="Node" parent="."]
-script = ExtResource("2_jh4iv")
-texture_icon_peep = ExtResource("3_0lsxy")
-texture_icon_branch = ExtResource("4_ahhl5")
+script = ExtResource("3_y1nl6")
+texture_icon_peep = ExtResource("4_4n7a1")
+texture_icon_branch = ExtResource("5_t5ui8")
 
 [node name="Marker2DCursor" type="Marker2D" parent="NodePlayerState"]
+visible = false
 position = Vector2(417, 260)
 
 [node name="SpriteTool" type="Sprite2D" parent="NodePlayerState/Marker2DCursor"]
+visible = false
 
 [connection signal="pressed" from="HUD/ButtonBackToStart" to="HUD" method="_on_button_back_to_start_pressed"]
 [connection signal="pressed" from="HUD/GridContainerToolBar/ButtonPeep" to="NodePlayerState" method="_on_button_peep_pressed"]
 [connection signal="pressed" from="HUD/GridContainerToolBar/ButtonBranch" to="NodePlayerState" method="_on_button_branch_pressed"]
-[connection signal="player_tool_cancelled" from="CanvasLayerBranchMap" to="NodePlayerState" method="_on_player_tool_cancelled"]

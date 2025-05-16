@@ -39,3 +39,9 @@ func _change_player_active_tool(tool) -> void:
 	
 	if (sprite_player_tool):
 		sprite_player_tool.set_texture(new_texture)
+	
+	var new_size = Vector2(0,0)
+	if (new_texture):
+		new_size = new_texture.get_size()*0.5
+
+	Input.set_custom_mouse_cursor(new_texture,Input.CURSOR_ARROW, new_size)
