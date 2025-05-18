@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://l823n0aboji3"]
 
-[ext_resource type="Script" uid="uid://6jugxpswyhyb" path="res://scripts/canvas_layer_branch_map.gd" id="1_4nw6i"]
+[ext_resource type="Script" uid="uid://6jugxpswyhyb" path="res://scripts/branch_map.gd" id="1_4nw6i"]
 [ext_resource type="PackedScene" uid="uid://b8htfti75a8t" path="res://scenes/scene_peep.tscn" id="2_dnn6n"]
 
 [node name="CanvasLayerBranchMap" type="CanvasLayer"]

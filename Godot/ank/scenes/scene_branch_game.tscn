@@ -1,12 +1,65 @@
-[gd_scene load_steps=6 format=3 uid="uid://d18m6tjj7ekjp"]
+[gd_scene load_steps=7 format=3 uid="uid://d18m6tjj7ekjp"]
 
 [ext_resource type="Script" uid="uid://bxe2idm88rwqi" path="res://scripts/branch_tree_hud.gd" id="1_s11bh"]
 [ext_resource type="PackedScene" uid="uid://l823n0aboji3" path="res://scenes/scene_branch_map.tscn" id="2_87o87"]
-[ext_resource type="Script" uid="uid://da3ou43wwqr87" path="res://scripts/node_player_state.gd" id="3_y1nl6"]
+[ext_resource type="Script" uid="uid://da3ou43wwqr87" path="res://scripts/player_state.gd" id="3_y1nl6"]
 [ext_resource type="Texture2D" uid="uid://b1w6437q8gkh4" path="res://content/images/icon_peep.png" id="4_4n7a1"]
 [ext_resource type="Texture2D" uid="uid://dofag8acl2hrt" path="res://content/images/icon_branch.png" id="5_t5ui8"]
+[ext_resource type="Script" uid="uid://bp7s5ubctmebd" path="res://scripts/player_tool.gd" id="6_87o87"]
 
 [node name="Node2DBranchGame" type="Node2D"]
+
+[node name="BranchMap" parent="." instance=ExtResource("2_87o87")]
+
+[node name="PlayerState" type="Node" parent="."]
+script = ExtResource("3_y1nl6")
+
+[node name="PlayerTool" type="Node" parent="PlayerState"]
+script = ExtResource("6_87o87")
+texture_icon_peep = ExtResource("4_4n7a1")
+texture_icon_branch = ExtResource("5_t5ui8")
+metadata/_custom_type_script = "uid://bp7s5ubctmebd"
+
+[node name="ToolBar" type="GridContainer" parent="PlayerState/PlayerTool"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = 205.0
+offset_right = 243.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="ButtonPeep" type="Button" parent="PlayerState/PlayerTool/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Peep"
+
+[node name="ButtonBranch" type="Button" parent="PlayerState/PlayerTool/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Branch"
+
+[node name="Button3" type="Button" parent="PlayerState/PlayerTool/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3"
+
+[node name="Button4" type="Button" parent="PlayerState/PlayerTool/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "4"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("1_s11bh")
@@ -25,63 +78,7 @@ offset_right = 90.0
 offset_bottom = 76.0
 text = "< Back"
 
-[node name="GridContainerToolBar" type="GridContainer" parent="HUD"]
-layout_direction = 2
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -230.0
-offset_top = 205.0
-offset_right = 243.0
-offset_bottom = 308.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 4
-
-[node name="ButtonPeep" type="Button" parent="HUD/GridContainerToolBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Peep"
-
-[node name="ButtonBranch" type="Button" parent="HUD/GridContainerToolBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Branch"
-
-[node name="Button3" type="Button" parent="HUD/GridContainerToolBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "3"
-
-[node name="Button4" type="Button" parent="HUD/GridContainerToolBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "4"
-
-[node name="CanvasLayerBranchMap" parent="." instance=ExtResource("2_87o87")]
-offset = Vector2(250, 250)
-transform = Transform2D(1, 0, 0, 1, 250, 250)
-
-[node name="NodePlayerState" type="Node" parent="."]
-script = ExtResource("3_y1nl6")
-texture_icon_peep = ExtResource("4_4n7a1")
-texture_icon_branch = ExtResource("5_t5ui8")
-
-[node name="Marker2DCursor" type="Marker2D" parent="NodePlayerState"]
-visible = false
-position = Vector2(417, 260)
-
-[node name="SpriteTool" type="Sprite2D" parent="NodePlayerState/Marker2DCursor"]
-visible = false
-
+[connection signal="tool_activated" from="PlayerState/PlayerTool" to="BranchMap" method="_on_player_tool_activated"]
+[connection signal="pressed" from="PlayerState/PlayerTool/ToolBar/ButtonPeep" to="PlayerState/PlayerTool" method="_on_button_peep_pressed"]
+[connection signal="pressed" from="PlayerState/PlayerTool/ToolBar/ButtonBranch" to="PlayerState/PlayerTool" method="_on_button_branch_pressed"]
 [connection signal="pressed" from="HUD/ButtonBackToStart" to="HUD" method="_on_button_back_to_start_pressed"]
-[connection signal="pressed" from="HUD/GridContainerToolBar/ButtonPeep" to="NodePlayerState" method="_on_button_peep_pressed"]
-[connection signal="pressed" from="HUD/GridContainerToolBar/ButtonBranch" to="NodePlayerState" method="_on_button_branch_pressed"]
