@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8htfti75a8t"]
 
-[ext_resource type="Script" uid="uid://d0q3kybjvve35" path="res://scripts/scene_peep.gd" id="1_s878q"]
+[ext_resource type="Script" uid="uid://d0q3kybjvve35" path="res://scripts/repo_peep.gd" id="1_s878q"]
 [ext_resource type="Texture2D" uid="uid://b1w6437q8gkh4" path="res://content/images/icon_peep.png" id="2_rn3vb"]
 
 [node name="NodePeep" type="Node2D"]
